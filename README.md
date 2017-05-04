@@ -117,7 +117,7 @@ $appDn = "ou=Apps,dc=csh,dc=rit,dc=edu";
 $userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
 
 // Append the appropriate dn to the username
-$ldapUser = "user=" . $ldapUser "," . $userDn;
+$ldapUser = "uid=" . $ldapUser "," . $userDn;
 
 // Connect to LDAP and bind the connection
 try {
