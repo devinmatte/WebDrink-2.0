@@ -16,11 +16,11 @@ require(__DIR__.'/../lib/elephant.io-2.0.4/Payload.php');
 
 // Declare some globals, dumb hack for PHP 5.3 to get ElephantIO working
 try {
-	if (DEBUG && USE_LOCAL_DRINK_SERVER) {
-		$elephant = new ElephantIOClient(LOCAL_DRINK_SERVER_URL, "socket.io", 1, false, true, true);
+	if ($_ENV['DEBUG'] && $_ENV['USE_LOCAL_DRINK_SERVER']) {
+		$elephant = new ElephantIOClient($_ENV['LOCAL_DRINK_SERVER_URL'], "socket.io", 1, false, true, true);
 	}
 	else {
-		$elephant = new ElephantIOClient(DRINK_SERVER_URL, "socket.io", 1, false, true, true);
+		$elephant = new ElephantIOClient($_ENV['DRINK_SERVER_URL'], "socket.io", 1, false, true, true);
 	}
 	$elephant_result = array();
 	$drop_data = array();
@@ -60,8 +60,8 @@ class DrinkAPI extends API
 			$this->uid = $this->_lookupUser($this->api_key);
 			$this->webauth = false;
 		}
-		else if (DEBUG) {
-			$this->uid = DEBUG_USER_UID;
+		else if ($_ENV['DEBUG']) {
+			$this->uid = $_ENV['DEBUG_USER_UID'];
 			$this->webauth = true;
 		}
 		else {
@@ -1111,7 +1111,7 @@ class DrinkAPI extends API
 			$drop_data["delay"] = 0;
 		}
 		// Check if rate limited
-		$rateLimitDelay = RATE_LIMIT_DROPS_DROP;
+		$rateLimitDelay = $_ENV['RATE_LIMIT_DROPS_DROP'];
 		if ($this->_isRateLimited("/drops/drop", $rateLimitDelay, $drop_data["machine_alias"])) {
 			return $this->_result(false, "Cannon exceed one call per $rateLimitDelay seconds (/drops/drop)", false);
 		}

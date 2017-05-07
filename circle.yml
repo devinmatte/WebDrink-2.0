@@ -1,0 +1,14 @@
+machine:
+  php:
+    version: 7.0.4
+
+dependencies:
+  pre:
+    - echo "extension=ldap.so" >>php --ini | grep "Loaded Configuration" | sed -e "s|.:\s||"``
+    - cd test
+    - npm install
+    - cd ..
+
+test:
+  override:
+    - phpunit test/build_tests.php

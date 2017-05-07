@@ -31,7 +31,7 @@ __It Uses:__
 Webdrink should be deployed with a configuration file, `config.php`, at the project root. It should have the following entries:
 
 ```php
-
+<?php
 /*
 *	General configuration
 */
@@ -99,7 +99,6 @@ catch (PDOException $e) {
 }
 
 ?>
-
 ```
 
 #### LDAP
@@ -110,14 +109,14 @@ catch (PDOException $e) {
 <?php
 
 // LDAP connection info
-$ldapUser = "username";
-$ldapPass = "password";
+$ldapUser = "uid=";
+$ldapPass = "";
 $ldapHost = "ldap.csh.rit.edu";
 $appDn = "ou=Apps,dc=csh,dc=rit,dc=edu";
 $userDn = "ou=Users,dc=csh,dc=rit,dc=edu";
 
 // Append the appropriate dn to the username
-$ldapUser = "uid=" . $ldapUser "," . $userDn;
+$ldapUser .= "," . $userDn;
 
 // Connect to LDAP and bind the connection
 try {
@@ -131,7 +130,6 @@ catch (Exception $e) {
 }
 
 ?>
-
 ```
 
 ## Development

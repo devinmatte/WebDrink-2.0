@@ -1,0 +1,20 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+
+before_install:
+  - echo "extension=ldap.so" >>php --ini | grep "Loaded Configuration" | sed -e "s|.:\s||"``
+
+install:
+  - cd test
+  - npm install
+  - cd ..
+
+script:
+  - echo $API_BASE_URL
+  - phpunit test/build_tests.php
+
+notifications:
+    on_success: never
+    on_failure: never

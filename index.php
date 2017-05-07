@@ -10,9 +10,9 @@ require_once("./config.php");
 
 // Grab some necessary info from webauth
 $user_data = array();
-if (DEBUG) {
-	$user_data['cn'] = htmlentities(DEBUG_USER_CN);
-	$user_data['uid'] = htmlentities(DEBUG_USER_UID);
+if ($_ENV['DEBUG']) {
+	$user_data['cn'] = htmlentities($_ENV['DEBUG_USER_CN']);
+	$user_data['uid'] = htmlentities($_ENV['DEBUG_USER_UID']);
 }
 else {
 	$user_data['uid'] = htmlentities($_SERVER['WEBAUTH_USER']);
@@ -79,7 +79,7 @@ $user_data['ibutton'] = $data[0]["ibutton"][0];
 		// Get the current user's info
 		window.current_user = <?php echo json_encode($user_data); ?>;
 		// Base URL of the API
-		var baseUrl = "<?php echo API_BASE_URL; ?>";
+		var baseUrl = "<?php echo $_ENV['API_BASE_URL']; ?>";
 		// Have the navbar collapse (on mobile) after a page is selected
 		document.addEventListener("DOMContentLoaded", function() {
 			jQuery('.navitem').click(function() {
