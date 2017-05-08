@@ -4,19 +4,19 @@
 *	Page initialization data 
 */
 // Include the LDAP connection info
-require_once("../../webdrink_info/ldapInfo.inc");
+require_once("../webdrink_info/ldapInfo.inc");
 // Include configuration info
 require_once("./config.php");
 
 // Grab some necessary info from webauth
 $user_data = array();
-if (DEBUG) {
-	$user_data['cn'] = "Ben Centra";
-	$user_data['uid'] = "bencentra";
+if ($_ENV['DEBUG']) {
+    $user_data['cn'] = htmlentities($_ENV['DEBUG_USER_CN']);
+    $user_data['uid'] = htmlentities($_ENV['DEBUG_USER_UID']);
 }
 else {
-	$user_data['uid'] = $_SERVER['WEBAUTH_USER'];
-	$user_data['cn'] = $_SERVER['WEBAUTH_LDAP_CN'];
+    $user_data['uid'] = htmlentities($_SERVER['WEBAUTH_USER']);
+    $user_data['cn'] = htmlentities($_SERVER['WEBAUTH_LDAP_CN']);
 }
 
 // Get some initial data from LDAP

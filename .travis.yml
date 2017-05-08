@@ -14,8 +14,6 @@ install:
   - cd ..
 
 script:
-  - echo $DRINK_SERVER_URL
-  - echo $RATE_LIMIT_DROPS_DROP
   - phpunit test/build_tests.php
 
 notifications:
